@@ -34,7 +34,10 @@ class GFG
 class Solution
 {
 	int  select(int arr[], int i)
+	
 	{
+	    
+	   /// Arrays.sort(arr);
         // code here such that selectionSort() sorts arr[]
         int min =i;
         for(int j = i+1;j<arr.length;j++){
