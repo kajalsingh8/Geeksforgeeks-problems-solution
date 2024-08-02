@@ -23,20 +23,28 @@ class GFG {
 }
 // } Driver Code Ends
 
-class Solution{
- static Long gcd(Long a, Long b) {
-        if (b == 0) {
-            return a;
-        }
-        return gcd(b, a % b);
-    }
+
+class Solution {
     static Long[] lcmAndGcd(Long A , Long B) {
-        long min = Math.min(A,B);
-        Long[] res = new Long[2];
-        res[1] = gcd(A,B);
-        long prod = A*B;
-        res[0] = (prod)/res[1];
-        return res;
+        // code here
+        Long a = A;
+        Long b = B;
+        
+        // Calculate GCD using Euclidean algorithm
+        while (a > 0 && b > 0) {
+            if (a > b) {
+                a = a % b;
+            } else {
+                b = b % a;
+            }
+        }
+        
+        Long gcd = (a == 0) ? b : a;
+        
+        // Calculate LCM using the formula LCM(A, B) = (A * B) / GCD(A, B)
+        Long lcm = (A * B) / gcd;
+        
+        // Return the result as an array
+        return new Long[]{lcm, gcd};
     }
 }
-
