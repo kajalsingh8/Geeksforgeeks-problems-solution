@@ -30,40 +30,12 @@ class Reverse
     // Complete the function
     // str: input string
     public static String reverseWord(String str)
-
     {
+        // Reverse the string str
+        StringBuilder sb=new StringBuilder(str);
+        String ss=sb.reverse().toString();
         
+        return ss;
         
-        char[] charStr=str.toCharArray();
-        int l=0;
-        int r=charStr.length-1;
-        
-        while(l<r){
-            char temp=charStr[l];
-            charStr[l]=charStr[r];
-            charStr[r]=temp;
-            
-            l++;
-            r--;
-        }
-        
-        return new String(charStr);
-        
-        
-        
-        // // Reverse the string str
-        // char l=0;
-        // char r=str.length()-1;
-        
-        // while(l<r){
-        //     char temp=str[l];
-        //     str[l]=str[r];
-        //     str[r]=temp;
-            
-        //     l++;
-        //     r--;
-        // }
-        
-        // return str;
     }
 }
