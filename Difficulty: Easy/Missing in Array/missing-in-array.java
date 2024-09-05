@@ -5,6 +5,7 @@ import java.io.*;
 import java.util.*;
 
 class GFG {
+
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
@@ -29,13 +30,16 @@ class Solution {
 
     // Note that the size of the array is n-1
     int missingNumber(int n, int arr[]) {
+      
+        int originalSum = n *( n+1)/2;
+        int  takensum = 0;
+        for(int i =0;i <arr.length;i++){
+            takensum += arr[i];
 
-        //N(N+1)/2,SUM,SUB
-        int sum=0;
-        int orgSum=(n*(n+1))/2;
-        for(int i=0;i<n-1;i++){
-            sum=sum+arr[i];
         }
-        return orgSum-sum;
+    
+        return originalSum - takensum;    
+         
+        // Your Code Here
     }
 }
