@@ -20,7 +20,9 @@ class GFG {
                 ans = 1;
             }
             System.out.println(ans);
-        }
+        
+System.out.println("~");
+}
     }
 }
 
@@ -28,17 +30,8 @@ class GFG {
 
 
 // User function Template for Java
-
 class Solution {
     static int dataTypeSize(String str) {
-        // code here
-        switch(str){
-            case "Character" : return 2;
-            case "Integer" : return 4;
-            case "Long" : return 8;
-            case "Float" : return 4;
-            case "Double" : return 8;
-            default : return -1;
-        }
+        return (str.equals("Character"))?2:(str.equals("Integer") || str.equals("Float"))? 4:(str.equals("Double") || str.equals("Long"))? 8:0;
     }
 }
