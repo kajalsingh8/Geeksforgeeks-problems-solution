@@ -13,7 +13,9 @@ class Main {
             Solution obj = new Solution();
             obj.printNos(N);
             System.out.println();
-        }
+        
+System.out.println("~");
+}
     }
 }
 // } Driver Code Ends
@@ -23,13 +25,10 @@ class Solution {
 
     void printNos(int N) {
         // code here
-        if(N==0){
+        if(N == 0){
             return;
         }
-        
-        System.out.print(N + " " );
-        
-         printNos(N-1  );
-         }
-         
+        System.out.print(N + " ");
+        printNos(N-1);
+    }
 }
