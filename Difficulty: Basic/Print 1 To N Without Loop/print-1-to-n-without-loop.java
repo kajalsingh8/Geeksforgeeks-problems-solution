@@ -40,11 +40,11 @@ class Main {
 class Solution {
 
     public void printNos(int n) {
-        //base case
-        if (n <= 0) {
+        // Your code here
+        if(n == 0){
             return;
         }
-        printNos(n-1); //recursive call
-        System.out.print(n + " "); //print
+        printNos(n-1);
+        System.out.print(n+" ");
     }
 }
