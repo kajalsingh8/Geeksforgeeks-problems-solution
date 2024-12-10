@@ -1,30 +1,51 @@
 //{ Driver Code Starts
-// Initial Template for Java
-
-import java.io.*;
 import java.util.*;
 
 public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int t = sc.nextInt(); // Number of test cases
+        sc.nextLine();        // Consume the newline character
 
-    public static void main(String[] args) throws Exception {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int tc = Integer.parseInt(br.readLine().trim());
-        while (tc-- > 0) {
-            String[] inputLine;
-            inputLine = br.readLine().trim().split(" ");
-            int n = Integer.parseInt(inputLine[0]);
-            int m = Integer.parseInt(inputLine[1]);
-            int[][] arr = new int[n][m];
-            inputLine = br.readLine().trim().split(" ");
+        while (t-- > 0) {
+            String input = sc.nextLine();
 
-            for (int i = 0; i < n; i++) {
-                for (int j = 0; j < m; j++) {
-                    arr[i][j] = Integer.parseInt(inputLine[i * m + j]);
+            // Replace ][ with ],[
+            input = input.replace("][", "],[");
+
+            ArrayList<ArrayList<Integer>> mat = new ArrayList<>();
+            String[] rows = input.split("],\\s*\\[");
+
+            for (String row : rows) {
+                row = row.replaceAll("[\\[\\]]", ""); // Remove any surrounding brackets
+                ArrayList<Integer> intRow = new ArrayList<>();
+                for (String num : row.split(",")) {
+                    intRow.add(Integer.parseInt(num.trim()));
                 }
+                mat.add(intRow);
             }
-            int ans = new Solution().rowWithMax1s(arr);
-            System.out.println(ans);
+
+            Solution obj = new Solution();
+            int result = obj.rowWithMax1s(convertListToArray(mat));
+
+            System.out.println(result);
+
+            System.out.println("~");
         }
+        sc.close();
+    }
+
+    // Helper method to convert ArrayList<ArrayList<Integer>> to 2D array
+    public static int[][] convertListToArray(ArrayList<ArrayList<Integer>> mat) {
+        int rows = mat.size();
+        int cols = mat.get(0).size();
+        int[][] arr = new int[rows][cols];
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                arr[i][j] = mat.get(i).get(j);
+            }
+        }
+        return arr;
     }
 }
 
@@ -36,12 +57,21 @@ public class Main {
 class Solution {
     public int rowWithMax1s(int arr[][]) {
         // code here
-           for(int i=0;i<arr[0].length;i++){
-            for(int j=0;j<arr.length;j++){
-                if(arr[j][i]==1)
-                return j;
+        int indx = -1;
+        int cnt = 0;
+        int max_cnt = 0;
+        for(int i = 0;i < arr.length;i++){
+            cnt = 0;
+            for(int j = 0; j<arr[0].length;j++){
+                if(arr[i][j] == 1){
+                    cnt++;
+                    if(cnt > max_cnt){
+                        indx = i;
+                        max_cnt = cnt;
+                    }
+                }
             }
         }
-        return -1;
+        return indx;
     }
 }
