@@ -29,6 +29,8 @@ public class GFG {
             int key = Integer.parseInt(in.readLine().trim());
 
             out.println(new Solution().search(arr, key));
+
+            out.println("~");
         }
         out.close();
     }
@@ -38,15 +40,35 @@ public class GFG {
 
 // User function Template for Java
 
-
 class Solution {
-    int search(int[] arr, int key) {
+    int search(int[] arr, int k) {
         // Complete this function
-        for(int i=0;i<arr.length;i++)
-        {
-            if(key==arr[i])
-            {
-                return i;
+        int n=arr.length;
+        int low = 0, high = n - 1;
+        while (low <= high) {
+            int mid = (low + high) / 2;
+
+            // if mid points to the target
+            if (arr[mid] == k)
+                return mid;
+
+            // if left part is sorted
+            if (arr[low] <= arr[mid]) {
+                if (arr[low] <= k && k <= arr[mid]) {
+                    // element exists
+                    high = mid - 1;
+                } else {
+                    // element does not exist
+                    low = mid + 1;
+                }
+            } else { // if right part is sorted
+                if (arr[mid] <= k && k <= arr[high]) {
+                    // element exists
+                    low = mid + 1;
+                } else {
+                    // element does not exist
+                    high = mid - 1;
+                }
             }
         }
         return -1;
