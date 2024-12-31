@@ -14,7 +14,7 @@ public class Main {
             int[] arr = Arrays.stream(inputArray).mapToInt(Integer::parseInt).toArray();
 
             Solution ob = new Solution();
-            int res = ob.findLongestConseqSubseq(arr);
+            int res = ob.longestConsecutive(arr);
 
             System.out.println(res);
             System.out.println("~");
@@ -28,21 +28,33 @@ public class Main {
 class Solution {
 
     // Function to return length of longest subsequence of consecutive integers.
-    public int findLongestConseqSubseq(int[] arr) {
+    public int longestConsecutive(int[] arr) {
         // code here
-        int maxcount=1;
-        int count=1;
         Arrays.sort(arr);
+        int currentlength=1;
+        int maxlength=1;
         for(int i=1;i<arr.length;i++){
-            if(arr[i]-arr[i-1]==1){
-                count++;
-            }else if(arr[i]-arr[i-1]==0){
+            if(arr[i]==arr[i-1]+1){
+                currentlength++;
                 
-            }else{
-                count=1;
             }
-            maxcount=Math.max(maxcount,count);
-        }
-        return maxcount;
+            else if (arr[i]==arr[i-1])
+               {
+                    continue;
+               }
+               else{
+                    maxlength=Math.max(maxlength,currentlength);
+                    currentlength=1;
+                }
+                
+                
+            }
+           maxlength=Math.max(maxlength,currentlength);
+           return maxlength;
+            
+            
+        
+        
     }
 }
+
