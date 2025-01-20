@@ -1,50 +1,58 @@
 //{ Driver Code Starts
+// Initial Template for Java
+
 import java.io.*;
 import java.util.*;
 
 class GFG {
-    public static void main(String args[]) throws IOException {
-        BufferedReader read =
-            new BufferedReader(new InputStreamReader(System.in));
-        int t = Integer.parseInt(read.readLine());
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int t;
+        t = Integer.parseInt(br.readLine());
         while (t-- > 0) {
-            String S[] = read.readLine().split(" ");
-            Long A = Long.parseLong(S[0]);
-            Long B = Long.parseLong(S[1]);
 
-            Solution ob = new Solution();
-            Long[] ptr = ob.lcmAndGcd(A,B);
-            
-            System.out.print(ptr[0]);
-            System.out.print(" ");
-            System.out.println(ptr[1]);
+            int a;
+            a = Integer.parseInt(br.readLine());
+
+            int b;
+            b = Integer.parseInt(br.readLine());
+
+            Solution obj = new Solution();
+            int[] ans = obj.lcmAndGcd(a, b);
+            System.out.println(ans[0] + " " + ans[1]);
+            System.out.println("~");
         }
     }
 }
+
+
 // } Driver Code Ends
+
+// User function Template for Java
+
 
 
 class Solution {
-    static Long[] lcmAndGcd(Long A , Long B) {
+    public static int[] lcmAndGcd(int a, int b) {
         // code here
-        Long a = A;
-        Long b = B;
-        
-        // Calculate GCD using Euclidean algorithm
-        while (a > 0 && b > 0) {
-            if (a > b) {
-                a = a % b;
-            } else {
-                b = b % a;
-            }
+        int m=a,n=b;
+        while(b!=0)
+        {
+            int r=a%b;
+            a=b;
+            b=r;
         }
-        
-        Long gcd = (a == 0) ? b : a;
-        
-        // Calculate LCM using the formula LCM(A, B) = (A * B) / GCD(A, B)
-        Long lcm = (A * B) / gcd;
-        
-        // Return the result as an array
-        return new Long[]{lcm, gcd};
+        int gcd=a;
+        int lcm=(m*n)/gcd;
+        return new int[]{lcm,gcd};
     }
 }
+
+
+
+
+
+
+//{ Driver Code Starts.
+
+// } Driver Code Ends
