@@ -17,6 +17,16 @@ class GFG {
             if (ans.size() == 0)
                 System.out.println("-1");
             else {
+                ans.sort((list1, list2) -> {
+                    int size = Math.min(list1.size(), list2.size());
+                    for (int i = 0; i < size; i++) {
+                        if (!list1.get(i).equals(list2.get(i))) {
+                            return list1.get(i) - list2.get(i);
+                        }
+                    }
+                    return list1.size() - list2.size();
+                });
+
                 for (int i = 0; i < ans.size(); i++) {
                     System.out.print("[");
                     for (int j = 0; j < ans.get(i).size(); j++)
@@ -25,6 +35,8 @@ class GFG {
                 }
                 System.out.println();
             }
+
+            System.out.println("~");
         }
     }
 }
@@ -34,35 +46,58 @@ class GFG {
 // User function Template for Java
 
 class Solution {
-    public boolean validate(int i,int j,int b[][]){
-        int ci=i,cj=j;
-        while(cj>=0) if(b[ci][cj--]==1) return false;
-        ci=i;cj=j;
-        while(ci>=0 && cj>=0) if(b[ci--][cj--]==1) return false;
-        ci=i;cj=j;
-        while(ci<b.length && cj>=0) if(b[ci++][cj--]==1) return false;
+    ArrayList<ArrayList<Integer>>list;
+    int[][] board;
+    public ArrayList<ArrayList<Integer>> nQueen(int n) {
+        // code here
+        list=new ArrayList<>();
+        board=new int[n][n];
+        solveNQueen(0,n);
+        return list;
+        
+    }
+    private boolean isSafe(int row,int col,int N){
+        for(int i=0;i<col;i++){
+            if(board[row][i]==1){
+                return false;
+            }
+        }
+        for (int i = row, j = col; i >= 0 && j >= 0; i--, j--) {
+            if (board[i][j] == 1) {
+                return false;
+            }
+        }
+
+        for (int i = row, j = col; i < N && j >= 0; i++, j--) {
+            if (board[i][j] == 1) {
+                return false;
+            }
+        }
         return true;
     }
-    public void dfs(int j,ArrayList<Integer> al,ArrayList<ArrayList<Integer>> ans,int n,int b[][]){
-        if(j==n){
-            ans.add(new ArrayList<>(al));
+    private void solveNQueen(int col,int N){
+        if(col>=N){
+            printSolution(N);
             return;
         }
-        for(int i=0;i<n;i++){
-            if(validate(i,j,b)){
-                b[i][j]=1;
-                al.add(i+1);
-                dfs(j+1,al,ans,n,b);
-                b[i][j]=0;
-                al.remove(al.size()-1);
+        for(int i=0;i<N;i++){
+            if(isSafe(i,col,N)){
+                board[i][col]=1;
+                solveNQueen(col+1,N);
+                board[i][col]=0;
             }
         }
     }
-    public ArrayList<ArrayList<Integer>> nQueen(int n) {
-        // code here
-        ArrayList<ArrayList<Integer>> ans=new ArrayList<>();
-        int[][] b=new int[n][n];
-        dfs(0,new ArrayList<>(),ans,n,b);
-        return ans;
+    private void printSolution(int N) {
+        ArrayList<Integer>ll=new ArrayList<>();
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++) {
+                if(board[i][j]==1){
+                    ll.add(j+1);
+                }
+                // System.out.print((board[i][j] == 1 ? "Q " : "- "));
+            }
+        }
+        list.add(ll);
     }
 }
