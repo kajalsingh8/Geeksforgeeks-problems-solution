@@ -31,17 +31,22 @@ class GFG {
 
 
 class Solution {
-    // Function to count number of ways to reach the nth stair.
     int countWays(int n) {
-
         // your code here
-        int[] ways = new int[n+1];
-        ways[0] = 1;
-        ways[1] = 1;
-        if(n == 1) return 1;
-        for(int i = 2;i<=n;i++){
-            ways[i] = ways[i-1] + ways[i-2];
-        }
-        return ways[n];
+        if(n<0)
+        return 0;
+        int[] dp = new int[n+1];
+        Arrays.fill(dp,-1);
+        return solve(n,dp);
+    }
+    private int solve(int n,int[] dp)
+    {
+        if(n==1)
+        return 1;
+        if(n==2)
+        return 2;
+        if(dp[n] != -1)
+        return dp[n];
+        return dp[n] = solve(n-1,dp)+solve(n-2,dp);
     }
 }
